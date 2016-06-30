@@ -13,17 +13,25 @@ syntax enable
 
 call vundle#begin()
 
-	"	generic plugins
+	"	generic 
 
 	Plugin 'pangloss/vim-javascript', { 'for' : 'javascript' }
 
-	"	javascript plugins
+	"	javascript 
 
 	Plugin 'jelera/vim-javascript-syntax', { 'for' : 'javascript' }
 	Plugin 'crusoexia/vim-monokai'
 	Plugin 'Valloric/YouCompleteMe'
 
-	"	gitHub markdown
+	"	html
+
+	Plugin 'mattn/emmet-vim'
+
+	"	sass/css
+	
+	Plugin 'cakebaker/scss-syntax.vim'
+
+	"	markdown
 
 	Plugin 'shime/vim-livedown'
 
@@ -38,3 +46,8 @@ colorscheme monokai
 let g:livedown_autorun = 0
 let g:livedown_open = 1
 let g:livedown_port = 1337
+
+"	emmet-vim
+
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
