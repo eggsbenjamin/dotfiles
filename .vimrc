@@ -2,6 +2,8 @@
 
 set nocompatible 
 set number
+set relativenumber
+set nowrap
 set backspace=2
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -13,10 +15,10 @@ syntax enable
 
 call vundle#begin()
 
-	"	generic 
+	"	syntax 
 
 	Plugin 'pangloss/vim-javascript', { 'for' : 'javascript' }
-
+	Plugin 'mxw/vim-jsx', { 'for' : 'javascript' }
 	"	javascript 
 
 	Plugin 'jelera/vim-javascript-syntax', { 'for' : 'javascript' }
@@ -39,6 +41,13 @@ call vundle#end()
 
 "	plugin dependent config
 
+"	jsx
+
+let g:jsx_ext_required = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+"	colour scheme
+
 colorscheme monokai
 
 "	livedown
@@ -50,4 +59,4 @@ let g:livedown_port = 1337
 "	emmet-vim
 
 let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
+autocmd FileType html,css,scss,jsx EmmetInstall
