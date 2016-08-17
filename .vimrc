@@ -5,6 +5,10 @@ set number
 set relativenumber
 set nowrap
 set backspace=2
+set shortmess+=c
+set tabstop=2
+set shiftwidth=2
+set expandtab
 set rtp+=~/.vim/bundle/Vundle.vim
 
 nnoremap <C-Left> :tabprevious<CR>
@@ -15,15 +19,21 @@ syntax enable
 
 call vundle#begin()
 
+	"	misc
+
+	Plugin 'scrooloose/nerdtree'
+  Plugin 'ternjs/tern_for_vim'
+	Plugin 'Valloric/YouCompleteMe'
+
 	"	syntax 
 
 	Plugin 'pangloss/vim-javascript', { 'for' : 'javascript' }
 	Plugin 'mxw/vim-jsx', { 'for' : 'javascript' }
+
 	"	javascript 
 
 	Plugin 'jelera/vim-javascript-syntax', { 'for' : 'javascript' }
 	Plugin 'crusoexia/vim-monokai'
-	Plugin 'Valloric/YouCompleteMe'
 
 	"	html
 
