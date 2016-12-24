@@ -14,6 +14,8 @@ set shiftwidth=2
 set expandtab
 set rtp+=~/.vim/bundle/Vundle.vim
 
+au BufRead,BufNewFile *.ts   setfiletype typescript
+
 nnoremap <C-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
 
@@ -31,6 +33,7 @@ call vundle#begin()
   Plugin 'ternjs/tern_for_vim'
 	Plugin 'Valloric/YouCompleteMe'
   Plugin 'editorconfig/editorconfig-vim'
+  Plugin 'Shougo/vimproc.vim'
 
   " git
 
@@ -45,6 +48,11 @@ call vundle#begin()
 
 	Plugin 'jelera/vim-javascript-syntax', { 'for' : 'javascript' }
 	Plugin 'crusoexia/vim-monokai'
+
+  " typescript
+
+  Plugin 'leafgarland/typescript-vim'
+  Plugin 'Quramy/tsuquyomi'
 
   " golang
 
@@ -89,3 +97,33 @@ autocmd FileType html,css,scss,jsx EmmetInstall
 " nerd-tree
 
 let NERDTreeShowHidden=1
+
+" typescript-vim
+
+let g:typescript_indent_disable = 1
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = ''
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+
+" YouCompleteMe
+
+let g:ycm_semantic_triggers =  {
+            \   'c' : ['->', '.'],
+            \   'objc' : ['->', '.'],
+            \   'ocaml' : ['.', '#'],
+            \   'cpp,objcpp' : ['->', '.', '::'],
+            \   'perl' : ['->'],
+            \   'php' : ['->', '::', '"', "'", 'use ', 'namespace ', '\'],
+            \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+            \   'html': ['<', '"', '</', ' '],
+            \   'vim' : ['re![_a-za-z]+[_\w]*\.'],
+            \   'ruby' : ['.', '::'],
+            \   'lua' : ['.', ':'],
+            \   'erlang' : [':'],
+            \   'haskell' : ['.', 're!.']
+            \ }
