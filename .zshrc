@@ -1,11 +1,35 @@
-# Path to your oh-my-zsh installation.
-export ZSH=/Users/Ben/.oh-my-zsh
+## Custom aliases/vars
+alias vim="/usr/local/bin/vim"
+alias vi="/usr/local/bin/vim"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+export REPOS=~/repos
+export WORK=$REPOS/work
+export GOPATH=~/go
+export GOBIN=$GOPATH/bin
+export GOHUB=$GOPATH/src/github.com
+export GOPIE=$GOPATH/src/github.com/piemapping
+export GOME=$GOPATH/src/github.com/eggsbenjamin
+export PATH=$PATH:$GOBIN
+export TERM="xterm-256color"
+export DEFAULT_USER="$(whoami)"
+
+## Functions
+
+# set docker-machine env 
+docker-env() {
+  eval $(docker-machine env $1)
+}
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/user/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -40,7 +64,7 @@ ZSH_THEME="robbyrussell"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -51,12 +75,11 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+source $ZSH/oh-my-zsh.sh
+
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/users/Ben/Applications/mongodb-osx-x86_64-3.0.3/bin:/Users/Ben/Library/Android/sdk/platform-tools:/Users/Ben/Library/Android/sdk/tools:/usr/local/bin/apache-ant-1.9.6/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -72,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -81,7 +104,4 @@ source $ZSH/oh-my-zsh.sh
 #
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh
-
-alias vim="/usr/local/Cellar/vim/7.4.865/bin/vim"
-alias vi="/usr/local/Cellar/vim/7.4.865/bin/vim"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
