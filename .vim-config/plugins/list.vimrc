@@ -11,4 +11,7 @@ call vundle#begin()
 
   " go
   Plugin 'fatih/vim-go'
+
+  " C/C++
+  Plugin 'WolfgangMehner/c-support'
 call vundle#end()
