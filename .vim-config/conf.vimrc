@@ -15,7 +15,7 @@ set expandtab
 set rtp+=~/.vim/bundle/Vundle.vim
 set foldmethod=indent
 set foldlevelstart=99
-
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " disable auto-commenting
 filetype off
 syntax enable
 

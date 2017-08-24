@@ -14,4 +14,6 @@ call vundle#begin()
 
   " C/C++
   Plugin 'WolfgangMehner/c-support'
+  Plugin 'vim-scripts/OmniCppComplete'
+  Plugin 'vim-scripts/cimpl'
 call vundle#end()
