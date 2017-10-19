@@ -1,5 +1,6 @@
 " general config
 
+set clipboard=unnamed
 set statusline=%<%f%h%m%r%w%y%=%l/%L,%c\ %P\ \|\ %n
 set nocompatible 
 set number

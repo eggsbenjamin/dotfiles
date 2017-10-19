@@ -6,10 +6,12 @@ export REPOS=~/repos
 export WORK=$REPOS/work
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
+export GOROOT=/usr/local/go
 export GOHUB=$GOPATH/src/github.com
-export GOPIE=$GOPATH/src/github.com/piemapping
+export GORI=$GOPATH/src/github.com/river-island
+export GOWORK=$GORI
 export GOME=$GOPATH/src/github.com/eggsbenjamin
-export PATH=$PATH:$GOBIN
+export PATH=$PATH:$GOBIN:$GOROOT/bin
 export TERM="xterm-256color"
 export DEFAULT_USER="$(whoami)"
 
@@ -24,7 +26,7 @@ docker-env() {
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/user/.oh-my-zsh
+export ZSH="/Users/${DEFAULT_USER}/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
