@@ -13,6 +13,7 @@ export GORI=$GOPATH/src/github.com/river-island
 export GOWORK=$GORI
 export GOME=$GOPATH/src/github.com/eggsbenjamin
 
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 export RUSTPATH=~/rust
 export RUSTBIN=~/.cargo/bin
 
