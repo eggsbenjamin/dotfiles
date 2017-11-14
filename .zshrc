@@ -3,6 +3,7 @@ alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
 
 export REPOS=~/repos
+
 export WORK=$REPOS/work
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
@@ -11,9 +12,17 @@ export GOHUB=$GOPATH/src/github.com
 export GORI=$GOPATH/src/github.com/river-island
 export GOWORK=$GORI
 export GOME=$GOPATH/src/github.com/eggsbenjamin
-export PATH=$PATH:$GOBIN:$GOROOT/bin
+
+export RUSTPATH=~/rust
+export RUSTBIN=~/.cargo/bin
+
+export PYTHON3_PATH=/Users/itbd/Library/Python/3.6
+export PYTHON3_LIBS=$PYTHON3_PATH/lib/python/site-packages
+
+export PATH=$PATH:$GOBIN:$GOROOT/bin:$RUSTBIN:$PYTHON3_LIBS
 export TERM="xterm-256color"
 export DEFAULT_USER="$(whoami)"
+export GPG_TTY=$(tty)
 
 ## Functions
 
