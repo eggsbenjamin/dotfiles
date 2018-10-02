@@ -16,7 +16,11 @@
   autocmd VimEnter *.go NERDTree .
 
   " vim-go
-  let g:go_fmt_experimental = 1
+  let g:go_fmt_options = { 'gofmt': '-s' }
+  let g:go_auto_type_info = 1
+  let g:go_auto_sameids = 1
+  let g:go_fmt_autosave = 1
+  let g:go_info_mode = 'guru'
 
   " vim-vue
   autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
@@ -41,3 +45,8 @@
   au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set tags+=~/.vim/tags/sdl
   au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set tags+=~/.vim/tags/sfml
   au BufWritePost *cpp,*hpp silent! execute "!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ." | redraw! 
+
+  " vim-racer
+  set hidden
+  let g:racer_cmd = $RUSTBIN."/racer"
+  let g:racer_experimental_completer = 1

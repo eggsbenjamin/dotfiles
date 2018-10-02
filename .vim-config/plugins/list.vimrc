@@ -1,19 +1,28 @@
-call vundle#begin()
+call plug#begin('~/.vim/bundle')
   " misc
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'Shougo/neocomplete'
+  Plug 'scrooloose/nerdtree'
+  Plug 'Shougo/neocomplete', { 'tag' : 'ver.2.1' }
 
   " appearance
-  Plugin 'fatih/molokai'
+  Plug 'fatih/molokai'
 
   " git
-  Plugin 'airblade/vim-gitgutter'
+  Plug 'airblade/vim-gitgutter'
 
   " go
-  Plugin 'fatih/vim-go'
+  Plug 'fatih/vim-go', { 'tag':'v1.18', 'do': ':GoUpdateBinaries' }
 
   " C/C++
-  Plugin 'WolfgangMehner/c-support'
-  Plugin 'vim-scripts/OmniCppComplete'
-  Plugin 'vim-scripts/cimpl'
-call vundle#end()
+  Plug 'WolfgangMehner/c-support'
+  Plug 'vim-scripts/OmniCppComplete'
+  Plug 'vim-scripts/cimpl'
+
+  " rust
+  Plug 'racer-rust/vim-racer'
+
+  " java
+  Plug 'starcraftman/vim-eclim'
+
+  " terraform
+  Plug 'hashivim/vim-terraform'
+call plug#end()

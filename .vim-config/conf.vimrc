@@ -1,5 +1,5 @@
 " general config
-
+"
 set clipboard=unnamed
 set statusline=%<%f%h%m%r%w%y%=%l/%L,%c\ %P\ \|\ %n
 set nocompatible 
@@ -16,7 +16,8 @@ set expandtab
 set rtp+=~/.vim/bundle/Vundle.vim
 set foldmethod=indent
 set foldlevelstart=99
+set directory=~/.vim/tmp " store all swap files here
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " disable auto-commenting
-filetype off
+filetype off 
 syntax enable
 

@@ -1,6 +1,7 @@
 ## Custom aliases/vars
 alias vim="/usr/local/bin/vim"
 alias vi="/usr/local/bin/vim"
+alias eclim="/Applications/Eclipse.app/Contents/Eclipse/eclimd -Xmx256M"
 
 export REPOS=~/repos
 
@@ -9,7 +10,7 @@ export GOPATH=~/go
 export GOBIN=$GOPATH/bin
 export GOROOT=/usr/local/go
 export GOHUB=$GOPATH/src/github.com
-export GORI=$GOPATH/src/github.com/river-island
+export GORI=$GOPATH/src/github.com/River-Island
 export GOWORK=$GORI
 export GOME=$GOPATH/src/github.com/eggsbenjamin
 
@@ -20,7 +21,11 @@ export RUSTBIN=~/.cargo/bin
 export PYTHON3_PATH=/Users/itbd/Library/Python/3.6
 export PYTHON3_LIBS=$PYTHON3_PATH/lib/python/site-packages
 
-export PATH=$PATH:$GOBIN:$GOROOT/bin:$RUSTBIN:$PYTHON3_LIBS
+export ANT_HOME=/opt/apache-ant-1.10.1
+
+export RABBITMQ_PATH=/opt/rabbitmq_server-3.7.8/sbin
+
+export PATH=$PATH:$GOBIN:$GOROOT/bin:$RUSTBIN:$PYTHON3_LIBS:$RABBITMQ_PATH
 export TERM="xterm-256color"
 export DEFAULT_USER="$(whoami)"
 export GPG_TTY=$(tty)
