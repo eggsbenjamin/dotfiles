@@ -1,52 +1,35 @@
-## Custom aliases/vars
-alias vim="/usr/local/bin/vim"
-alias vi="/usr/local/bin/vim"
-alias eclim="/Applications/Eclipse.app/Contents/Eclipse/eclimd -Xmx256M"
-
 export REPOS=~/repos
 
 export WORK=$REPOS/work
 export GOPATH=~/go
 export GOBIN=$GOPATH/bin
 export GOROOT=/usr/local/go
+export GOPRIVATE=github.com/sky-uk/* # for go mod to use ssh when accessing sky-uk repos
 export GOHUB=$GOPATH/src/github.com
-export GORI=$GOPATH/src/github.com/River-Island
-export GOWORK=$GORI
+export GOSKY=$GOPATH/src/github.com/sky-uk
+export GOWORK=$GOSKY
 export GOME=$GOPATH/src/github.com/eggsbenjamin
+export GOSP=$GOME/scratchpad
+export GO111MODULE=on
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export ANDROID_HOME=~/Library/Android/sdk
+export PROTOBUF_PATH=/opt/protobuf
 
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-export RUSTPATH=~/rust
-export RUSTBIN=~/.cargo/bin
-
-export PYTHON3_PATH=/Users/itbd/Library/Python/3.6
-export PYTHON3_LIBS=$PYTHON3_PATH/lib/python/site-packages
-
-export ANT_HOME=/opt/apache-ant-1.10.1
-
-export RABBITMQ_PATH=/opt/rabbitmq_server-3.7.8/sbin
-
-export PATH=$PATH:$GOBIN:$GOROOT/bin:$RUSTBIN:$PYTHON3_LIBS:$RABBITMQ_PATH
+export PATH=$PATH:$GOBIN:$GOROOT/bin:$JAVA_HOME/bin:$PROTOBUF_PATH/bin:/usr/local/sbin:/usr/local/kubebuilder/bin:/usr/local/go/bin:/opt/spark-2.4.3-bin-hadoop2.7/bin
 export TERM="xterm-256color"
 export DEFAULT_USER="$(whoami)"
 export GPG_TTY=$(tty)
+export SPARK_HOME=/opt/spark-2.4.3-bin-hadoop2.7
+export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
+export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/pyspark:$PYTHONPATH
 
-## Functions
-
-# set docker-machine env 
-docker-env() {
-  eval $(docker-machine env $1)
-}
-
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
+ #Path to your oh-my-zsh installation.
 export ZSH="/Users/${DEFAULT_USER}/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel10k/powerlevel10k" #"agnoster"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -90,7 +73,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git go kubectl kube-ps1 zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -122,3 +105,58 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# k8s
+
+alias maxima="rlwrap /Applications/Maxima.app/Contents/Resources/maxima.sh"
+alias ll='ls -lah'
+
+alias k=kubectl
+alias ka='kubectl apply'
+alias kc='kubectl create'
+alias kd='kubectl describe'
+alias kdel='kubectl delete'
+alias ke='kubectl edit'
+alias kg='kubectl get'
+alias kl='kubectl logs'
+alias klf='kubectl logs -f'
+alias koot='kubectl run koot --restart=Never -t -i -n kube-system --image overridden --overrides '\''{"spec":{"hostPID": true, "hostNetwork": true, "hostIPC": true, "containers":[{"name":"alpine","image":"alpine:3.7","command":["nsenter","--mount=/proc/1/ns/mnt","--","/bin/bash"],"stdin": true,"tty":true,"securityContext":{"privileged":true}}]}}'\'' --rm --attach'
+alias kr='kubectl replace'
+alias ku='kubectl update'
+alias kx='kubectl exec'
+
+alias kctx="kubectx"
+alias kns="kubens"
+
+PROMPT=$PROMPT'$(echo "\n$(kube_ps1)\n \$ ")'
+
+
+# productivity
+
+alias preview="open -a Preview"
+#alias swagger="docker run --rm -it -e GOPATH=$HOME/go:/go -v $HOME:$HOME -w $(pwd) quay.io/goswagger/swagger:v0.24.0"
+alias openapi-generator="docker run --rm -v $PWD:$PWD -w $PWD openapitools/openapi-generator-cli"
+alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+
+# functions
+
+getVBoxIP() {
+  VBoxManage guestproperty enumerate $1 | grep IP | awk -F "," '{print $2}' | awk -F ":" '{print $2}' | tr -d '[:space:]'
+}
+
+loginsky() {
+  eval $(skylogin)
+  export AWS_DEFAULT_REGION=us-west-2
+}
+
+
+loginecr() {
+  eval $(aws ecr get-login --no-include-email)
+}
+
+deleteAllK8sResources(){
+  for sib in `kg $2 -n $1 -o name `; do kdel $sib -n $1; done
+}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
