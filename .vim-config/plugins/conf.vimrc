@@ -17,10 +17,25 @@
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | wincmd q |endif
 
+  " markdown-preview
+  nmap <C-s> <Plug>MarkdownPreview
+  nmap <M-s> <Plug>MarkdownPreviewStop
+  nmap <C-p> <Plug>MarkdownPreviewToggle
+  let g:mkdp_page_title = '${name}'
+  let g:mkdp_auto_start = 0
+  let g:mkdp_auto_close = 0
+  let g:mkdp_preview_options = {
+      \ 'sync_scroll_type': 'relative'
+      \ }
+
+  "  md-img-paste
+  autocmd FileType markdown nmap <buffer><silent> <leader>p :call mdip#MarkdownClipboardImage()<CR>
+
   " ultisnips
-  let g:UltiSnipsExpandTrigger = '<tab>'
-  let g:UltiSnipsJumpForwardTrigger = '<tab>'
-  let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsJumpForwardTrigger="<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+  let g:UltiSnipsListSnippets="<c-tab>"
 
   " vim-go
   let g:go_fmt_command = "goimports"
@@ -34,12 +49,9 @@
 
   command! GoRestartGopls call go#lsp#Restart() " restart gopls language server
 
-  " vim-vue
-  autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
-
   " lervag/latex
   let g:tex_flavor='latex'
-  let g:vimtex_view_method='zathura'
+  let g:vimtex_view_method='skim'
   let g:vimtex_quickfix_mode=0
 
   " KeitaNakamura/tex-conceal
@@ -65,14 +77,13 @@
   au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set tags+=~/.vim/tags/sfml
   au BufWritePost *cpp,*hpp silent! execute "!ctags -R --c++-kinds=+pl --fields=+iaS --extra=+q ." | redraw! 
 
-  " vim-racer
-  set hidden
-  let g:racer_cmd = $RUSTBIN."/racer"
-  let g:racer_experimental_completer = 1
-
-  " python
-  let g:jedi#completions_enabled = 1
-  let g:pymode_rope = 0
-
   " latex
   let g:tex_flavor='latex'
+
+  " ale
+  let g:ale_linters = {
+  \   'markdown': ['mdl'],
+  \   'go': ['gofmt', 'golint', 'go vet', 'golangserver'],
+  \   'latex': ['proselint', 'chktex', 'lacheck'],
+  \   'tex': ['proselint', 'chktex', 'lacheck']
+  \}

@@ -11,11 +11,13 @@ export GOWORK=$GOSKY
 export GOME=$GOPATH/src/github.com/eggsbenjamin
 export GOSP=$GOME/scratchpad
 export GO111MODULE=on
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=`/usr/libexec/java_home -v 11`
 export ANDROID_HOME=~/Library/Android/sdk
 export PROTOBUF_PATH=/opt/protobuf
+export TODO_DIR=~/todo
+export TODAY_TODO=$TODO_DIR/`date "+%d-%m-%Y"`.md
 
-export PATH=$PATH:$GOBIN:$GOROOT/bin:$JAVA_HOME/bin:$PROTOBUF_PATH/bin:/usr/local/sbin:/usr/local/kubebuilder/bin:/usr/local/go/bin:/opt/spark-2.4.3-bin-hadoop2.7/bin
+export PATH=$PATH:$GOBIN:$GOROOT/bin:$JAVA_HOME/bin:$PROTOBUF_PATH/bin:/usr/local/sbin:/usr/local/kubebuilder/bin:/usr/local/go/bin:/opt/spark-2.4.3-bin-hadoop2.7/bin:$HOME/.emacs.d/bin:/usr/local/anaconda3/bin
 export TERM="xterm-256color"
 export DEFAULT_USER="$(whoami)"
 export GPG_TTY=$(tty)
@@ -108,8 +110,10 @@ source $ZSH/oh-my-zsh.sh
 
 # k8s
 
-alias maxima="rlwrap /Applications/Maxima.app/Contents/Resources/maxima.sh"
+#alias maxima="rlwrap /Applications/Maxima.app/Contents/Resources/maxima.sh"
 alias ll='ls -lah'
+
+# kubectl 
 
 alias k=kubectl
 alias ka='kubectl apply'
@@ -128,6 +132,23 @@ alias kx='kubectl exec'
 alias kctx="kubectx"
 alias kns="kubens"
 
+# core kubectl v1.13.2
+
+alias ck=corectl
+alias cka='corectl apply'
+alias ckc='corectl create'
+alias ckd='corectl describe'
+alias ckdel='corectl delete'
+alias cke='corectl edit'
+alias ckg='corectl get'
+alias ckl='corectl logs'
+alias cklf='corectl logs -f'
+alias ckoot='corectl run koot --restart=Never -t -i -n kube-system --image overridden --overrides '\''{"spec":{"hostPID": true, "hostNetwork": true, "hostIPC": true, "containers":[{"name":"alpine","image":"alpine:3.7","command":["nsenter","--mount=/proc/1/ns/mnt","--","/bin/bash"],"stdin": true,"tty":true,"securityContext":{"privileged":true}}]}}'\'' --rm --attach'
+alias ckr='corectl replace'
+alias cku='corectl update'
+alias ckx='corectl exec'
+
+
 PROMPT=$PROMPT'$(echo "\n$(kube_ps1)\n \$ ")'
 
 
@@ -137,6 +158,9 @@ alias preview="open -a Preview"
 #alias swagger="docker run --rm -it -e GOPATH=$HOME/go:/go -v $HOME:$HOME -w $(pwd) quay.io/goswagger/swagger:v0.24.0"
 alias openapi-generator="docker run --rm -v $PWD:$PWD -w $PWD openapitools/openapi-generator-cli"
 alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+alias note="vim -m note.md"
+
+alias restart_docker_daemon="killall Docker && open /Applications/Docker.app"
 
 # functions
 

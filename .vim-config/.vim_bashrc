@@ -1,0 +1,5 @@
+# this is a minimal rc which is used used whenever vim runs a shell cmd
+
+shopt -s expand_aliases
+
+alias maxima="/Applications/Maxima.app/Contents/Resources/maxima.sh"
