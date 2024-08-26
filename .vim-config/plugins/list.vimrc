@@ -1,38 +1,23 @@
 call plug#begin('~/.vim/bundle')
   " misc
   Plug 'scrooloose/nerdtree'
-  Plug 'Shougo/neocomplete', { 'tag' : 'ver.2.1' }
   Plug 'dense-analysis/ale'
 
   " markdown
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-  Plug 'ferrine/md-img-paste.vim'
-
-  " snippets
-  Plug 'sirver/ultisnips'
-  Plug 'honza/vim-snippets'
 
   " appearance
   Plug 'fatih/molokai'
-
-  " tex/latex
-  Plug 'lervag/vimtex', { 'tag' : 'v2.0' }
-  Plug 'KeitaNakamura/tex-conceal.vim'
 
   " git
   Plug 'airblade/vim-gitgutter'
 
   " go
-  Plug 'fatih/vim-go', { 'tag':'v1.23', 'do': ':GoUpdateBinaries' }
+  Plug 'fatih/vim-go', { 'commit': 'feef9b31507f8e942bcd21f9e1f22d587c83c72d', 'do': ':GoUpdateBinaries' }
 
-  " C/C++
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " cpp
+  Plug 'rip-rip/clang_complete'
 
-  " terraform
-  Plug 'hashivim/vim-terraform'
-
-  " bash
-  Plug 'vim-scripts/bats.vim'
-
-
+  " lldb
+  " Plug 'lldb-tools/vim-lldb' # TODO: compile vim with python3 support for this plugin to work
 call plug#end()

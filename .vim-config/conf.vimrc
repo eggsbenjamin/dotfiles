@@ -1,13 +1,11 @@
 " general config
 
-filetype off 
 syntax enable
-
-let $BASH_ENV = "~/.vim-config/.vim_bashrc"
 
 " set leader key to space
 let mapleader=" "
 
+set filetype
 set shortmess=at
 set mouse=a
 set clipboard=unnamed
@@ -24,16 +22,12 @@ set shortmess+=c
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set rtp+=~/.vim/bundle/Vundle.vim
 set foldmethod=indent
 set foldlevelstart=99
 set swapfile
 set directory=~/.vim/tmp " store all swap files here
-" set autoread " reload buffer if modified outside of vim
+set autoread " reload buffer if modified outside of vim
 
-" https://github.com/gillescastel/latex-snippets
-setlocal spell
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o " disable auto-commenting
 autocmd FileType yaml setl indentkeys-=<:> " diable auto indent for yaml files
