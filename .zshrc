@@ -1,29 +1,21 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export REPOS=~/repos
 
-export WORK=$REPOS/work
-export GOPATH=~/go
-export GOBIN=$GOPATH/bin
+export GOPATH="${HOME}/go"
 export GOROOT=/usr/local/go
-export GOPRIVATE=github.com/sky-uk/* # for go mod to use ssh when accessing sky-uk repos
-export GOHUB=$GOPATH/src/github.com
-export GOSKY=$GOPATH/src/github.com/sky-uk
-export GOWORK=$GOSKY
-export GOME=$GOPATH/src/github.com/eggsbenjamin
-export GOSP=$GOME/scratchpad
-export GO111MODULE=on
-export JAVA_HOME=`/usr/libexec/java_home -v 11`
-export ANDROID_HOME=~/Library/Android/sdk
-export PROTOBUF_PATH=/opt/protobuf
-export TODO_DIR=~/todo
-export TODAY_TODO=$TODO_DIR/`date "+%d-%m-%Y"`.md
+export GOBIN="${GOROOT}/bin"
 
-export PATH=$PATH:$GOBIN:$GOROOT/bin:$JAVA_HOME/bin:$PROTOBUF_PATH/bin:/usr/local/sbin:/usr/local/kubebuilder/bin:/usr/local/go/bin:/opt/spark-2.4.3-bin-hadoop2.7/bin:$HOME/.emacs.d/bin:/usr/local/anaconda3/bin
+# ${HOME}/Library/Python/3.9/bin
+export PATH="$PATH:$GOPATH/bin:$GOBIN:$HOME/bin:/usr/local/sbin"
 export TERM="xterm-256color"
 export DEFAULT_USER="$(whoami)"
 export GPG_TTY=$(tty)
-export SPARK_HOME=/opt/spark-2.4.3-bin-hadoop2.7
-export PYTHONPATH=$SPARK_HOME/python/lib/py4j-0.10.7-src.zip
-export PYTHONPATH=$SPARK_HOME/python:$SPARK_HOME/python/pyspark:$PYTHONPATH
 
  #Path to your oh-my-zsh installation.
 export ZSH="/Users/${DEFAULT_USER}/.oh-my-zsh"
@@ -75,7 +67,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git go kubectl kube-ps1 zsh-completions)
+plugins=(git golang kubectl kube-ps1 zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -132,55 +124,12 @@ alias kx='kubectl exec'
 alias kctx="kubectx"
 alias kns="kubens"
 
-# core kubectl v1.13.2
-
-alias ck=corectl
-alias cka='corectl apply'
-alias ckc='corectl create'
-alias ckd='corectl describe'
-alias ckdel='corectl delete'
-alias cke='corectl edit'
-alias ckg='corectl get'
-alias ckl='corectl logs'
-alias cklf='corectl logs -f'
-alias ckoot='corectl run koot --restart=Never -t -i -n kube-system --image overridden --overrides '\''{"spec":{"hostPID": true, "hostNetwork": true, "hostIPC": true, "containers":[{"name":"alpine","image":"alpine:3.7","command":["nsenter","--mount=/proc/1/ns/mnt","--","/bin/bash"],"stdin": true,"tty":true,"securityContext":{"privileged":true}}]}}'\'' --rm --attach'
-alias ckr='corectl replace'
-alias cku='corectl update'
-alias ckx='corectl exec'
-
-
 PROMPT=$PROMPT'$(echo "\n$(kube_ps1)\n \$ ")'
-
 
 # productivity
 
 alias preview="open -a Preview"
-#alias swagger="docker run --rm -it -e GOPATH=$HOME/go:/go -v $HOME:$HOME -w $(pwd) quay.io/goswagger/swagger:v0.24.0"
-alias openapi-generator="docker run --rm -v $PWD:$PWD -w $PWD openapitools/openapi-generator-cli"
-alias vscode="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
-alias note="vim -m note.md"
-
-alias restart_docker_daemon="killall Docker && open /Applications/Docker.app"
-
-# functions
-
-getVBoxIP() {
-  VBoxManage guestproperty enumerate $1 | grep IP | awk -F "," '{print $2}' | awk -F ":" '{print $2}' | tr -d '[:space:]'
-}
-
-loginsky() {
-  eval $(skylogin)
-  export AWS_DEFAULT_REGION=us-west-2
-}
-
-
-loginecr() {
-  eval $(aws ecr get-login --no-include-email)
-}
-
-deleteAllK8sResources(){
-  for sib in `kg $2 -n $1 -o name `; do kdel $sib -n $1; done
-}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ :$PATH: == *:$HOME/bin:* ]] || PATH=$HOME/bin:$PATH
